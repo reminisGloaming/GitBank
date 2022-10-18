@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.mapper.UserMapper">
+
+    <!-- int insertUser();-->
+     <insert id="insertUser">
+             insert into t_user values(null,'admin','1234526',22,'male','296136161@qq.com');
+     </insert>
+
+    <!--void updateUser();-->
+    <update id="updateUser">
+        update t_user set username='小智' where id=8;
+    </update>
+
+    <!-- void deleteUser();-->
+    <delete id="deleteUser">
+        delete from t_user where id =8;
+    </delete>
+
+    <!-- User getUserById();-->
+    <select id="getUserById" resultType="com.mybatis.pojo.User">
+        select * from t_user where id=8;
+    </select>
+
+    <select id="getAllUser" resultType="com.mybatis.pojo.User">
+        select * from t_user;
+    </select>
+</mapper>
