@@ -1,0 +1,324 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link type="text/css" rel="stylesheet" href="css/style.css"/>
+    <script src="vue/axios.min.js"></script>
+    <script src="vue/vue.min.js"></script>
+
+    <title>尤洪</title>
+</head>
+<body>
+
+<div id="soubg">
+    <!--Begin Header Begin-->
+    <div class="soubg">
+        <div class="sou">
+        <span class="fr">
+        	<span class="fl">你好，请<a href="Login.html">登录</a>&nbsp; <a href="Regist.html" style="color:#ff4e00;">免费注册</a>&nbsp; </span>
+            <span class="fl">|&nbsp;关注我们：</span>
+            <span class="s_sh"><a href="#" class="sh1">新浪</a><a href="#" class="sh2">微信</a></span>
+            <span class="fr">|&nbsp;<a href="#">手机版&nbsp;<img src="images/s_tel.png" align="absmiddle"/></a></span>
+        </span>
+        </div>
+    </div>
+    <!--End Header End-->
+    <!--Begin Login Begin-->
+    <div class="log_bg">
+        <div class="top">
+            <div class="logo"><a href="Index.html"><img src="images/logo.png"/></a></div>
+        </div>
+        <div class="regist">
+            <div class="log_img"><img src="images/l_img.png" width="611" height="425"/></div>
+            <div class="reg_c" id="register">
+                <table border="0" style="width:420px; font-size:14px; margin-top:20px;" cellspacing="0" cellpadding="0">
+
+                    <tr height="40" valign="top">
+                        <td width="95">&nbsp;</td>
+                        <td>
+                            <span class="fl" style="font-size:24px;">注册</span>
+                            <span class="fr">已有商城账号，<a href="Login.html"
+                                                             style="color:#ff4e00;">我要登录</a></span>
+                        </td>
+                    </tr>
+
+                    <tr height="50">
+                        <td align="right"><font color="#ff4e00">*</font>&nbsp;用户名 &nbsp;</td>
+                        <td>
+                            <input type="text" value="" class="l_user" v-model="loginName" @blur="checkLoginName"/>
+                        </td>
+                    </tr>
+
+                    <tr height="50">
+                        <td align="right"><font color="#ff4e00">*</font>&nbsp;姓名 &nbsp;</td>
+                        <td><input type="text" value="" class="l_user" v-model="userName"/></td>
+                    </tr>
+
+                    <tr height="35">
+                        <td align="right"><font color="#ff4e00">*</font>&nbsp;性别 &nbsp;</td>
+                        <td>
+                            <select v-model="sex">
+                                <option value="">请选择</option>
+                                <option value="1">男</option>
+                                <option value="2">女</option>
+                            </select>
+                        </td>
+                    </tr>
+
+
+                    <tr height="50">
+                        <td align="right"><font color="#ff4e00">*</font>&nbsp;密码 &nbsp;</td>
+                        <td><input type="password" value="" class="l_pwd" v-model="password"/></td>
+                    </tr>
+
+                    <tr height="50">
+                        <td align="right"><font color="#ff4e00">*</font>&nbsp;确认密码 &nbsp;</td>
+                        <td><input type="password" value="" class="l_pwd" v-model="secPassWord"/></td>
+                    </tr>
+
+                    <tr height="50">
+                        <td align="right"><font color="#ff4e00">*</font>&nbsp;邮箱 &nbsp;</td>
+                        <td><input type="text" value="" class="l_email" v-model="email"/></td>
+                    </tr>
+
+                    <tr height="50">
+                        <td align="right"><font color="#ff4e00">*</font>&nbsp;验证码 &nbsp;</td>
+                        <td><input type="text" value="" class="l_email" v-model="proveCode" style="width: 100px"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button :disabled="isButtonDisabled" style="width: 100px;height: 36px" @click="sendEmail()">
+                                发送验证码
+                            </button>
+                            <span v-if="isButtonDisabled">{{number}}s</span>
+                        </td>
+                    </tr>
+
+                    <tr height="50">
+                        <td align="right"><font color="#ff4e00">*</font>&nbsp;手机号码</td>
+                        <td><input type="text" value="" class="l_tel" v-model="mobile"/></td>
+                    </tr>
+
+                    <tr height="50">
+                        <td align="right"><font color="#ff4e00">*</font>&nbsp;身份证号码 &nbsp;</td>
+                        <td><input type="text" value="" class="l_tel" v-model="identityCode"/></td>
+                    </tr>
+
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td style="font-size:12px; padding-top:20px;">
+                	<span style="font-family:'宋体';" class="fl">
+                    	<label class="r_rad"><input type="checkbox" v-model="isChecked"/></label><label class="r_txt">我已阅读并接受《用户协议》</label>
+                    </span>
+                        </td>
+                    </tr>
+
+                    <tr height="60">
+                        <td>&nbsp;</td>
+                        <td><input type="button" value="立即注册" class="log_btn" @click="addUser"/></td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <!--End Login End-->
+    <!--Begin Footer Begin-->
+    <div class="btmbg">
+        <div class="btm">
+            备案/许可证编号：蜀ICP备12009302号-1-www.dingguagua.com Copyright © 2015-2018 尤洪商城网 All Rights Reserved.
+            复制必究 , Technical Support: Dgg Group <br/>
+            <img src="images/b_1.gif" width="98" height="33"/><img src="images/b_2.gif" width="98" height="33"/><img
+                src="images/b_3.gif" width="98" height="33"/><img src="images/b_4.gif" width="98" height="33"/><img
+                src="images/b_5.gif" width="98" height="33"/><img src="images/b_6.gif" width="98" height="33"/>
+        </div>
+    </div>
+    <!--End Footer End -->
+
+</div>
+</body>
+
+
+<script>
+    let vm = new Vue({
+        el: "#soubg",
+
+        data: {
+            loginName: "",
+            repeatName: "",
+            userName: "",
+            password: "",
+            secPassWord: "",
+            sex: "",
+            email: "",
+            mobile: "",
+            identityCode: "",
+
+            isRegisted: false, //用户名是否可以使用
+
+            isChecked: false, //是否勾选
+
+            proveCode: "",  //验证码
+            number: 180,      //等待时间
+            isButtonDisabled: false,  //按钮是否禁用
+        },
+
+        methods: {
+
+            //验证用户名是否重复
+            checkLoginName: function () {
+                axios({
+                    url: "/api/user/checkLoginName",
+                    params: {
+                        loginName: this.loginName
+                    }
+                }).then(rs => {
+
+                    console.log(rs.data.msg);
+
+                    if (rs.data.msg != null) {
+                        alert("用户名不能重复");
+                        this.isRegisted = false;
+                    } else {
+                        alert("用户名可以使用");
+                        this.isRegisted = true;
+                    }
+                })
+            },
+
+            //发送邮箱验证码
+            sendEmail: function () {
+
+                //获得当前邮箱
+                let email = this.email;
+
+                //邮箱格式验证
+                if (!(email.substring(email.length - 4, email.length) === ".com" && email.lastIndexOf("@") !== -1 && email.lastIndexOf("@") < email.lastIndexOf(".com"))) {
+                    alert("邮箱格式错误！")
+                    return;
+                }
+
+                //发送邮箱,开始计时
+                axios({
+                    url: "/api/sendEmail",
+                    params: {
+                        email
+                    }
+                }).then(rs => {
+                    time = setInterval(function () {
+                        vm.number--
+                    }, 1000);
+                    this.isButtonDisabled = true;
+
+                })
+
+            },
+
+
+            //增加用户
+            addUser: function () {
+
+                //勾选协议
+                if (this.isChecked == false) {
+                    alert("勾选完协议,才可以注册");
+                    return;
+                }
+
+                let loginName = this.loginName;
+                let userName = this.userName;
+                let password = this.password;
+                let secPassWord = this.secPassWord;
+                let sex = this.sex;
+                let identityCode = this.identityCode;
+                let email = this.email;
+                let mobile = this.mobile;
+                let proveCode = this.proveCode;
+
+                if (loginName === '' || userName === '' || password === '' || sex === '' || identityCode === '' || email === '' || mobile === '' || proveCode === '') {
+                    alert("所有内容都不能为空，请重新输入！");
+                    return;
+                }
+
+                if (this.isRegisted == false) {
+                    alert("用户名不可以重复");
+                    return;
+                }
+
+                if (password.length < 4) {
+                    alert("密码长度至少要4位");
+                    return;
+                }
+
+                if (password != secPassWord) {
+                    alert("两次密码输入长度要一样,值也要一样");
+                    return;
+                }
+
+
+                //邮箱格式验证
+                if (!(email.substring(email.length - 4, email.length) === ".com" && email.lastIndexOf("@") !== -1 && email.lastIndexOf("@") < email.lastIndexOf(".com"))) {
+                    alert("邮箱格式错误！")
+                    return;
+                }
+
+                if (!/^1[3|4|5|7|8|9][0-9]{9}$/.test(mobile)) {
+                    alert("手机号格式有误！");
+                    return;
+                }
+                if (!/^(?:\d{15}|\d{17}([0-9]|X))$/.test(identityCode)) {
+                    alert("身份证格式有误！");
+                    return;
+                }
+
+
+                //验证邮箱验证码
+                axios({
+                    url: "/api/getProveCode",
+                    params: {
+                        email: this.email
+                    }
+                }).then(rs => {
+                    if (rs.data.proveCode != this.proveCode) {
+                        alert("邮箱验证码有误,请重新输入");
+                        return;
+                    }
+
+                    //注册完成之后跳到登录页
+                    axios({
+                        url: "/api/user/addUser",
+                        params: {
+                            loginName: this.loginName,
+                            userName: this.userName,
+                            password: this.password,
+                            sex: this.sex,
+                            email: this.email,
+                            mobile: this.mobile,
+                            identityCode: this.identityCode,
+                        }
+                    }).then(rs => {
+                        alert(rs.data.msg);
+                        if (rs.data.msg == "增加用户成功") {
+                            window.location.href = "/api/login.html";
+                        } else {
+                            alert("注册失败");
+                        }
+                    })
+                })
+            }
+        },
+
+        //观测属性
+        watch: {
+            number: {
+                handler(newValue) {
+                    if (newValue === 0) {
+                        clearInterval(time)
+                        this.number = 180;
+                        this.isButtonDisabled = false
+                    }
+                }
+            }
+        },
+
+    })
+</script>
+
+</html>

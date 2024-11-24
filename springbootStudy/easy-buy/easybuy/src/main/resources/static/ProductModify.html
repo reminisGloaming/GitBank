@@ -1,0 +1,651 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link type="text/css" rel="stylesheet" href="css/style.css"/>
+
+    <script src="vue/axios.min.js"></script>
+    <script src="vue/axios.interceptor.js"></script>
+    <script src="vue/vue.min.js"></script>
+    <script src="vue/img.js"></script>
+</head>
+<body>
+
+<div id="soubg">
+    <div class="soubg">
+        <div class="sou">
+            <!--Begin 所在收货地区 Begin-->
+            <span class="s_city_b">
+        	<span class="fl">送货至：</span>
+            <span class="s_city">
+            	<span>四川</span>
+                <div class="s_city_bg">
+                	<div class="s_city_t"></div>
+                    <div class="s_city_c">
+                    	<h2>请选择所在的收货地区</h2>
+                        <table border="0" class="c_tab" style="width:235px; margin-top:10px;" cellspacing="0"
+                               cellpadding="0">
+                          <tr>
+                            <th>A</th>
+                            <td class="c_h"><span>安徽</span><span>澳门</span></td>
+                          </tr>
+                          <tr>
+                            <th>B</th>
+                            <td class="c_h"><span>北京</span></td>
+                          </tr>
+                          <tr>
+                            <th>C</th>
+                            <td class="c_h"><span>重庆</span></td>
+                          </tr>
+                          <tr>
+                            <th>F</th>
+                            <td class="c_h"><span>福建</span></td>
+                          </tr>
+                          <tr>
+                            <th>G</th>
+                            <td class="c_h"><span>广东</span><span>广西</span><span>贵州</span><span>甘肃</span></td>
+                          </tr>
+                          <tr>
+                            <th>H</th>
+                            <td class="c_h"><span>河北</span><span>河南</span><span>黑龙江</span><span>海南</span><span>湖北</span><span>湖南</span></td>
+                          </tr>
+                          <tr>
+                            <th>J</th>
+                            <td class="c_h"><span>江苏</span><span>吉林</span><span>江西</span></td>
+                          </tr>
+                          <tr>
+                            <th>L</th>
+                            <td class="c_h"><span>辽宁</span></td>
+                          </tr>
+                          <tr>
+                            <th>N</th>
+                            <td class="c_h"><span>内蒙古</span><span>宁夏</span></td>
+                          </tr>
+                          <tr>
+                            <th>Q</th>
+                            <td class="c_h"><span>青海</span></td>
+                          </tr>
+                          <tr>
+                            <th>S</th>
+                            <td class="c_h"><span>上海</span><span>山东</span><span>山西</span><span
+                                    class="c_check">四川</span><span>陕西</span></td>
+                          </tr>
+                          <tr>
+                            <th>T</th>
+                            <td class="c_h"><span>台湾</span><span>天津</span></td>
+                          </tr>
+                          <tr>
+                            <th>X</th>
+                            <td class="c_h"><span>西藏</span><span>香港</span><span>新疆</span></td>
+                          </tr>
+                          <tr>
+                            <th>Y</th>
+                            <td class="c_h"><span>云南</span></td>
+                          </tr>
+                          <tr>
+                            <th>Z</th>
+                            <td class="c_h"><span>浙江</span></td>
+                          </tr>
+                        </table>
+                    </div>
+                </div>
+            </span>
+        </span>
+            <!--End 所在收货地区 End-->
+            <span class="fr">
+        	<span class="fl">
+                <span v-if="loginName===''">你好，请<a href="Login.html">登录</a>&nbsp;</span>
+                <span v-else>欢迎:
+                    <span style="font-size: 16px">{{loginName}}</span> &nbsp;
+                    <a href="#" @click.prevent="exit">注销</a>&nbsp;
+                </span>
+
+
+                <a href="/api/Regist.html" style="color:#ff4e00;">免费注册</a>&nbsp;|&nbsp;
+                <a href="/api/Member_Order.html">我的订单</a>&nbsp;|</span>
+
+        	<span class="ss">
+            	<div class="ss_list">
+                	<a href="#">收藏夹</a>
+                    <div class="ss_list_bg">
+                    	<div class="s_city_t"></div>
+                        <div class="ss_list_c">
+                        	<ul>
+                            	<li><a href="/api/Member_Collect.html">我的收藏</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="ss_list">
+                	<a href="#">客户服务</a>
+                    <div class="ss_list_bg">
+                    	<div class="s_city_t"></div>
+                        <div class="ss_list_c">
+                        	<ul>
+                            	<li><a href="/api/Member_Safe.html">账户安全</a></li>
+                                <li><a href="/api/NewsList.html">资讯列表</a></li>
+                                <li><a href="/api/ProductList.html">商品列表</a></li>
+                                <li><a href="/api/Member_address.html">用户地址</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="ss_list">
+                	<a href="#">购物</a>
+                    <div class="ss_list_bg">
+                    	<div class="s_city_t"></div>
+                        <div class="ss_list_c">
+                        	<ul>
+                            	<li><a href="/api/CategoryList.html">全部商品</a></li>
+                                <li><a href="/api/BuyCar.html">购物车</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </span>
+            <span class="fl">|&nbsp;关注我们：</span>
+            <span class="s_sh"><a href="#" class="sh1">新浪</a><a href="#" class="sh2">微信</a></span>
+            <span class="fr">|&nbsp;<a href="#">手机版&nbsp;<img src="images/s_tel.png" align="absmiddle"/></a></span>
+        </span>
+        </div>
+    </div>
+    <div class="m_top_bg">
+        <div class="top">
+            <div class="m_logo"><a href="/api/Index.html"><img src="images/logo1.png"/></a></div>
+            <div class="m_search">
+                <form>
+                    <input type="text" value="" class="m_ipt"/>
+                    <input type="submit" value="搜索" class="m_btn"/>
+                </form>
+                <span class="fl"><a href="#">咖啡</a><a href="#">iphone 6S</a><a href="#">新鲜美食</a><a
+                        href="#">蛋糕</a><a
+                        href="#">日用品</a><a href="#">连衣裙</a></span>
+            </div>
+            <div class="i_car">
+                <div class="car_t">购物车 [ <span>{{car.totalNum}}</span> ]</div>
+
+                <div class="car_bg">
+
+                    <!--Begin 购物车未登录 Begin-->
+                    <div class="un_login" v-if="loginName==''||loginName==null">还未登录！<a href="/api/Login.html"
+                                                                                            style="color:#ff4e00;">马上登录</a>
+                        查看购物车！
+                    </div>
+
+
+                    <!--End 购物车未登录 End-->
+                    <!--Begin 购物车已登录 Begin-->
+                    <div v-else>
+                        <ul class="cars">
+                            <li v-for="carDetail in carDetailList">
+                                <div class="img"><a href="#"><img
+                                        :src="imgURL+carDetail.fileName" width="58"
+                                        height="58"/></a></div>
+                                <div class="name"><a href="#">{{carDetail.productName}}</a></div>
+                                <div class="price"><font color="#ff4e00">{{carDetail.price}}</font> X{{carDetail.buyNum}}
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="price_sum">共计&nbsp; <font color="#ff4e00">￥</font><span>{{car.totalPrice}}</span>
+                        </div>
+                        <div class="price_a"><a :href="'BuyCar.html?id='+car.id">去购物车结算</a></div>
+                        <!--End 购物车已登录 End-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="i_bg bg_color">
+        <!--Begin 用户中心 Begin -->
+        <div class="m_content">
+            <div class="m_left" id="mySlide">
+                <!--            用户管理、资讯添加、商品管理、分类管理要进行权限判断、-->
+
+                <div class="left_n"></div>
+                <div class="left_m">
+                    <div class="left_m_t t_bg1">订单中心</div>
+                    <ul>
+                        <li><a href="/api/Member_Order.html">订单管理</a></li>
+                        <li><a href="/api/Member_Address.html" style="color: #ff3600">收货地址</a></li>
+                    </ul>
+                </div>
+                <div class="left_m">
+                    <div class="left_m_t t_bg3">账户中心</div>
+                    <ul>
+                        <li><a href="/api/Member_Safe.html">账户安全</a></li>
+                        <li><a href="/api/Member_Collect.html">我的收藏</a></li>
+                    </ul>
+                </div>
+                <div class="left_m" v-if="userType==1">
+                    <div class="left_m_t t_bg4">用户管理</div>
+                    <ul>
+                        <li><a href="/api/UserManager.html">用户列表</a></li>
+                    </ul>
+                </div>
+                <div class="left_m">
+                    <div class="left_m_t t_bg4">资讯管理</div>
+                    <ul>
+                        <li><a href="/api/NewsList.html">资讯列表</a></li>
+                        <li><a href="/api/NewsAdd.html" v-show="userType==1">资讯添加</a></li>
+                    </ul>
+                </div>
+                <div class="left_m" v-show="userType==1">
+                    <div class="left_m_t t_bg4">商品管理</div>
+                    <ul>
+                        <li><a href="/api/ProductList.html">商品列表</a></li>
+                        <li><a href="/api/ProductAdd.html">商品添加</a></li>
+                    </ul>
+                </div>
+                <div class="left_m" v-show="userType==1">
+                    <div class="left_m_t t_bg4">分类管理</div>
+                    <ul>
+                        <li><a href="/api/categoryList.html">分类列表</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!--        <div class="i_bg bg_color" style="">-->
+            <!--Begin 用户中心 Begin -->
+            <!--            <div class="m_content">-->
+            <div class="m_right" id="myTable">
+
+                <div class="mem_tit">商品修改列表</div>
+                <table style="margin-top: 80px">
+                    <tr height="50">
+                        <td align="right"><font color="#ff4e00">*</font>&nbsp;商品名 &nbsp;</td>
+                        <td><input type="text" value="" class="l_user" v-model="name"/></td>
+                    </tr>
+                    <tr height="50">
+                        <td align="right"><font color="#ff4e00">*</font>&nbsp;商品描述 &nbsp;</td>
+                        <td><input type="text" value="" class="l_user" v-model="description"/></td>
+                    </tr>
+                    <tr height="50">
+                        <td align="right"><font color="#ff4e00">*</font>&nbsp;价格 &nbsp;</td>
+                        <td><input type="text" value="" class="l_user" v-model="price"/></td>
+                    </tr>
+
+                    <tr height="50">
+                        <td align="right"><font color="#ff4e00">*</font>&nbsp;库存 &nbsp;</td>
+                        <td><input type="text" value="" class="l_user" v-model="stock"/></td>
+                    </tr>
+
+
+                    <tr height="50">
+                        <td align="right"><font color="#ff4e00"></font>&nbsp;图片 &nbsp;</td>
+                        <td><img style="width: 150px;height: 150px" :src="img"></td>
+                    </tr>
+
+                    <tr height="50">
+                        <td align="right"><font color="#ff4e00"></font>&nbsp;分类类别 &nbsp;</td>
+                        <td>
+                            <span>一级分类</span>
+
+
+                            <select v-model="categoryLevel1Id" @change="getSecondProductCategory(categoryLevel1Id)">
+                                <option v-for="(cate,index) in pcList1" :value="cate.id">{{cate.name}}</option>
+                            </select>
+                            &nbsp;&nbsp;&nbsp;
+
+
+                            <span>二级分类</span>
+
+                            <select v-model="categoryLevel2Id" @change="getThirdProductCategory(categoryLevel2Id)">
+                                <option value="0">请选择</option>
+                                <option v-for="(cate,index) in pcList2" v-if="cate.parentId==categoryLevel1Id"
+                                        :value="cate.id">{{cate.name}}
+                                </option>
+                            </select>
+                            &nbsp;&nbsp;&nbsp;
+
+                            <span>三级分类</span>
+
+                            <select v-model="categoryLevel3Id">
+                                <option value="0">请选择</option>
+                                <option v-for="(cate,index) in pcList3" v-if="cate.parentId==categoryLevel2Id"
+                                        :value="cate.id">{{cate.name}}
+                                </option>
+                            </select>
+                    </tr>
+
+
+                    <tr height="50">
+                        <td align="right"><font color="#ff4e00"></font>&nbsp;选择文件 &nbsp;</td>
+                        <td><input type="file" @change="handleFileUpload(event)"/></td>
+                    </tr>
+
+                    <tr height="50">
+                        <td></td>
+                        <td><input style="margin-top: 30px" type="button" value="修改" @click.prevent="updateProduct()"
+                                   class="log_btn"></td>
+                    </tr>
+                </table>
+
+            </div>
+
+            <!--</div>-->
+            <!--/div>-->
+        </div>
+        <!--End 用户中心 End-->
+        <!--Begin Footer Begin -->
+        <div class="b_btm_bg b_btm_c">
+            <div class="b_btm">
+                <table border="0" style="width:210px; height:62px; float:left; margin-left:75px; margin-top:30px;"
+                       cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="72"><img src="images/b1.png" width="62" height="62"/></td>
+                        <td><h2>正品保障</h2>正品行货 放心购买</td>
+                    </tr>
+                </table>
+                <table border="0" style="width:210px; height:62px; float:left; margin-left:75px; margin-top:30px;"
+                       cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="72"><img src="images/b2.png" width="62" height="62"/></td>
+                        <td><h2>满38包邮</h2>满38包邮 免运费</td>
+                    </tr>
+                </table>
+                <table border="0" style="width:210px; height:62px; float:left; margin-left:75px; margin-top:30px;"
+                       cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="72"><img src="images/b3.png" width="62" height="62"/></td>
+                        <td><h2>天天低价</h2>天天低价 畅选无忧</td>
+                    </tr>
+                </table>
+                <table border="0" style="width:210px; height:62px; float:left; margin-left:75px; margin-top:30px;"
+                       cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="72"><img src="images/b4.png" width="62" height="62"/></td>
+                        <td><h2>准时送达</h2>收货时间由你做主</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="b_nav">
+            <dl>
+                <dt><a href="#">新手上路</a></dt>
+                <dd><a href="#">售后流程</a></dd>
+                <dd><a href="#">购物流程</a></dd>
+                <dd><a href="#">订购方式</a></dd>
+                <dd><a href="#">隐私声明</a></dd>
+                <dd><a href="#">推荐分享说明</a></dd>
+            </dl>
+            <dl>
+                <dt><a href="#">配送与支付</a></dt>
+                <dd><a href="#">货到付款区域</a></dd>
+                <dd><a href="#">配送支付查询</a></dd>
+                <dd><a href="#">支付方式说明</a></dd>
+            </dl>
+            <dl>
+                <dt><a href="#">会员中心</a></dt>
+                <dd><a href="#">资金管理</a></dd>
+                <dd><a href="#">我的收藏</a></dd>
+                <dd><a href="#">我的订单</a></dd>
+            </dl>
+            <dl>
+                <dt><a href="#">服务保证</a></dt>
+                <dd><a href="#">退换货原则</a></dd>
+                <dd><a href="#">售后服务保证</a></dd>
+                <dd><a href="#">产品质量保证</a></dd>
+            </dl>
+            <dl>
+                <dt><a href="#">联系我们</a></dt>
+                <dd><a href="#">网站故障报告</a></dd>
+                <dd><a href="#">购物咨询</a></dd>
+                <dd><a href="#">投诉与建议</a></dd>
+            </dl>
+            <div class="b_tel_bg">
+                <a href="#" class="b_sh1">新浪微博</a>
+                <a href="#" class="b_sh2">腾讯微博</a>
+                <p>
+                    服务热线：<br/>
+                    <span>400-123-4567</span>
+                </p>
+            </div>
+            <div class="b_er">
+                <div class="b_er_c"><img src="images/er.gif" width="118" height="118"/></div>
+                <img src="images/ss.png"/>
+            </div>
+        </div>
+        <div class="btmbg">
+            <div class="btm">
+                备案/许可证编号：蜀ICP备12009302号-1-www.dingguagua.com Copyright © 2015-2018 尤洪商城网 All Rights
+                Reserved.
+                复制必究 , Technical Support: Dgg Group <br/>
+                <img src="images/b_1.gif" width="98" height="33"/><img src="images/b_2.gif" width="98" height="33"/><img
+                    src="images/b_3.gif" width="98" height="33"/><img src="images/b_4.gif" width="98" height="33"/><img
+                    src="images/b_5.gif" width="98" height="33"/><img src="images/b_6.gif" width="98" height="33"/>
+            </div>
+        </div>
+        <!--End Footer End -->
+    </div>
+
+</div>
+</body>
+
+<script>
+
+    //获取商品列表传过来的id
+    let urlParams = new URLSearchParams(window.location.search);
+    let id = urlParams.get("id");
+
+    let vm = new Vue({
+
+
+        el: "#soubg",
+
+        data: {
+            id,
+            name: "",
+            description: "",
+            price: "",
+            stock: "",
+
+            fileName: "",
+            img: "",
+            fileItem: "",
+
+            categoryLevel1Id: 0,
+            categoryLevel2Id: 0,
+            categoryLevel3Id: 0,
+
+            pcList1: "",
+            pcList2: "",
+            pcList3: "",
+
+            userType: "",
+
+            loginName: "",
+
+            car: "",
+
+            carDetailList: "",
+        },
+
+        methods: {
+
+
+            exit: function () {
+                if (confirm("你确定要注销吗?")) {
+                    axios({
+                        url: "/api/loginOut",
+                    }).then(rs => {
+                        if (rs.data.msg == "true") {
+                            alert("注销成功");
+                            window.sessionStorage.clear();
+                            window.location.href = "/api/login.html";
+                        }
+                    })
+                }
+            },
+
+            getCar() {
+                axios({
+                    url: "/api/car/getCar",
+                }).then(rs => {
+                    this.car = rs.data.car;
+
+                    //定义一个专门存放 购物车的数组 把返回的集合遍历,集合元素放入数组
+                    let array = [];
+
+                    for (let car in rs.data.carMap) {
+                        array.push(rs.data.carMap[car]);
+                    }
+
+                    this.carDetailList = array;
+                })
+            },
+
+
+            //获得上传的文件
+            handleFileUpload: function (event) {
+                vm.fileItem = event.target.files[0];
+            },
+
+            //修改商品
+
+            updateProduct: function () {
+                let id = vm.id;
+                let name = vm.name;
+                let description = vm.description;
+                let price = vm.price;
+                let stock = vm.stock;
+
+                let categoryLevel1Id = vm.categoryLevel1Id;
+                let categoryLevel2Id = vm.categoryLevel2Id;
+                let categoryLevel3Id = vm.categoryLevel3Id;
+
+
+                let fileItem = vm.fileItem;
+
+                if (name === '' || price === '' || stock === '' || categoryLevel1Id === "0") {
+                    alert("内容有空，请继续填写！")
+                    return;
+                }
+                if (!/^(0|[1-9]\d*)(\.\d{1,2})?$/.test(price)) {
+                    alert("价格是一个支持两小数点的正数！")
+                    return;
+                }
+                if (!/^\d+$/.test(stock)) {
+                    alert("库存是正整数！")
+                    return;
+                }
+
+
+                let formData = new FormData();
+                formData.append('id', id);
+                formData.append('name', name);
+                formData.append('description', description);
+                formData.append('price', price);
+                formData.append('stock', stock);
+                formData.append('categoryLevel1Id', categoryLevel1Id);
+                formData.append('categoryLevel2Id', categoryLevel2Id);
+                formData.append('categoryLevel3Id', categoryLevel3Id);
+                formData.append('fileItem', fileItem);
+
+                axios({
+                    url: "/api/product/checkProductName",
+                    params: {
+                        name
+                    },
+                }).then(rs => {
+                    if (rs.data.product != null && rs.data.product.id != vm.id) {
+                        alert("商品名有重复,请重命名");
+                        return;
+                    }
+                    axios({
+                        url: '/api/product/updateProduct',
+                        method: 'POST',
+                        data: formData
+                    }).then(function (rs) {
+                        alert(rs.data.msg);
+
+                        if (rs.data.msg === "修改成功") {
+                            let isGo = window.confirm("修改成功，是否跳转回商品页面？")
+                            if (!isGo) {
+                                location.href = 'ProductModify.html?id=' + vm.id;
+                            } else {
+                                location.href = 'ProductList.html';
+                            }
+                        } else {
+                            alert("修改失败！")
+                        }
+                    })
+                })
+            },
+
+
+            //根据一级分类查看所有的二级分类
+            getSecondProductCategory(categoryLevel1Id) {
+                axios({
+                    url: "/api/product/getSecondProductCategory",
+                    params: {
+                        categoryLevel1Id
+                    },
+                }).then(rs => {
+                    vm.pcList2 = rs.data.pcList2;
+                })
+            },
+
+
+            //根据二级分类查看所有的三级分类
+            getThirdProductCategory(categoryLevel2Id) {
+                axios({
+                    url: "/api/product/getThirdProductCategory",
+                    params: {
+                        categoryLevel2Id
+                    },
+                }).then(rs => {
+                    vm.pcList3 = rs.data.pcList3;
+                })
+            },
+
+
+            //查找商品
+            find: function (id) {
+                axios({
+                    url: "/api/product/selectProduct",
+                    params: {
+                        id
+                    }
+                }).then(rs => {
+                    console.log(rs.data.product);
+                    this.name = rs.data.product.name;
+                    this.description = rs.data.product.description;
+                    this.price = rs.data.product.price;
+                    this.stock = rs.data.product.stock;
+                    this.fileName = rs.data.product.fileName;
+                    this.img = imgURL + this.fileName;
+
+                    this.categoryLevel1Id = rs.data.product.categoryLevel1Id;
+                    this.categoryLevel2Id = rs.data.product.categoryLevel2Id;
+                    this.categoryLevel3Id = rs.data.product.categoryLevel3Id;
+
+                    this.pcList1 = rs.data.pcList1;
+                    this.pcList2 = rs.data.pcList2;
+                    this.pcList3 = rs.data.pcList3;
+
+                });
+            },
+        },
+
+
+        created: function () {
+            this.find(id);
+
+            let token = window.sessionStorage.getItem("token");
+
+            if (token == null || token == "") {
+                return;
+            }
+
+            axios({
+                url: "/api/user/findUserFromToken",
+            }).then(rs => {
+                this.loginName = rs.data.user.loginName;
+                this.userType = rs.data.user.type;
+                this.getCar();
+            })
+        }
+    })
+
+</script>
+
+</html>

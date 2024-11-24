@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.doghome.easybuy.mapper.OrderMapper">
+
+    <!--        查询订单    -->
+    <select id="getOrderList" resultType="Order">
+        SELECT * FROM easybuy_order
+
+        <where>
+
+            <if test="loginName !=null and loginName!=''">
+                AND loginName like #{loginName}
+            </if>
+
+            <if test="isPay !=null and isPay!=''">
+                AND isPay=#{isPay}
+            </if>
+
+            <if test="createTime !=null and createTime!=''">
+                AND createTime like #{createTime}
+            </if>
+
+            <if test="serialNumber !=null and serialNumber!=''">
+                AND serialNumber = #{serialNumber}
+            </if>
+
+            <if test="userId!=null and userId!=''">
+                AND userId = #{userId}
+            </if>
+
+            AND delFlag=0
+        </where>
+
+    </select>
+
+
+    <!--         查询订单详情     -->
+    <select id="getOrderDetailList" resultType="OrderDetail">
+        select d.*,p.name as name,p.fileName as fileName from easybuy_order_detail d,easybuy_product p
+        <where>
+            d.productId = p.id
+            <if test="orderIds != null and orderIds.size() > 0">
+                and d.orderId in
+                <foreach item="orderId" collection="orderIds" open="(" separator="," close=")">
+                    #{orderId}
+                </foreach>
+            </if>
+
+            <if test="orderId!=null and orderId!=''">
+                and orderId=#{orderId}
+            </if>
+        </where>
+    </select>
+
+
+    <update id="updateOrder">
+        UPDATE easybuy_order
+        <set>
+            <if test="isPay!=null and isPay!=''">
+                isPay=#{isPay}
+            </if>
+        </set>
+
+        <where>
+            <if test="serialNumber!=null and serialNumber!=''">
+                serialNumber=#{serialNumber}
+            </if>
+
+            <if test="id!=null and id!=''">
+                id=#{id}
+            </if>
+        </where>
+
+    </update>
+
+    <update id="deleteOrder">
+        UPDATE easybuy_order SET delFlag=1 WHERE id=#{id};
+    </update>
+
+    <insert id="addOrder" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into easybuy_order (userId, loginName, userAddress, createTime, cost, serialNumber, isPay, delFlag)
+        values (#{userId}, #{loginName}, #{userAddress}, now(), #{cost}, #{serialNumber}, 0, 0)
+    </insert>
+
+    <insert id="addOrderDetail">
+        insert into easybuy_order_detail (orderId, productId, quantity, cost)
+        values (#{orderId}, #{productId}, #{quantity}, #{cost})
+    </insert>
+
+
+    <select id="getOrder" resultType="Order">
+        SELECT * FROM easybuy_order
+
+        <where>
+            <if test="id!=null and id!=''">
+                id=#{id}
+            </if>
+
+            <if test="serialNumber!=null and serialNumber!=''">
+                and serialNumber=#{serialNumber}
+            </if>
+        </where>
+    </select>
+
+</mapper>

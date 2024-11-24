@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.doghome.easybuy.mapper.UserMapper">
+
+    <select id="selectUserByLoginName" resultType="user">
+        SELECT * FROM easybuy_user WHERE loginName = #{loginName};
+    </select>
+
+
+    <select id="UserByPage" resultType="user">
+        SELECT * FROM easybuy_user
+
+        <where>
+            <if test="userName!=null and userName!=''">
+                userName like #{userName}
+            </if>
+
+            <if test="createTime!=null and createTime !=''">
+                createTime like #{createTime}
+            </if>
+            and delFlag!=1
+        </where>
+    </select>
+
+
+    <insert id="addUser">
+        insert into easybuy_user (loginName, userName, password, sex, identityCode, email, mobile,
+        type,createTime,delFlag)
+        values (#{loginName},#{userName},#{password},#{sex},#{identityCode},#{email},#{mobile},0,NOW(),0)
+    </insert>
+
+
+    <select id="selectUserById" resultType="user">
+        SELECT * FROM easybuy_user WHERE id=#{id};
+    </select>
+
+    <update id="updateUser">
+        UPDATE easybuy_user
+
+        <set>
+
+            <if test="loginName!=null and loginName!=''">
+                loginName=#{loginName},
+            </if>
+
+            <if test="userName!=null and userName!=''">
+                userName=#{userName},
+            </if>
+
+
+            <if test="password!=null and password!=''">
+                password=#{password},
+            </if>
+
+            <if test="sex!=null and sex!=''">
+                sex=#{sex},
+            </if>
+
+            <if test="identityCode!=null and identityCode!=''">
+                identityCode=#{identityCode},
+            </if>
+
+            <if test="email!=null and email!=''">
+                email=#{email},
+            </if>
+
+            <if test="mobile!=null and mobile!=''">
+                mobile=#{mobile},
+            </if>
+
+            <if test="type!=null and type!=''">
+                type=#{type}
+            </if>
+
+        </set>
+
+        WHERE id=#{id}
+    </update>
+
+    <update id="deleteUser">
+        UPDATE easybuy_user SET delFlag = 1 WHERE id=#{id};
+    </update>
+
+</mapper>

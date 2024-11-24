@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.doghome.easybuy.mapper.ProductMapper">
+
+    <select id="saveProductListToEs" resultType="product">
+        SELECT * FROM easybuy_product WHERE isDelete!=1;
+    </select>
+
+    <select id="getProductList" resultType="product">
+        SELECT * FROM easybuy_product
+        <where>
+
+            <if test="name!=null and name!=''">
+                name LIKE #{name}
+            </if>
+
+            <if test="name!=null and name!=''">
+                AND createTime LIKE #{createTime}
+            </if>
+
+            AND isDelete!=1
+        </where>
+
+    </select>
+
+
+    <update id="deleteProduct">
+        UPDATE easybuy_product SET isDelete=1 where id=#{id};
+    </update>
+
+    <select id="selectProduct" resultType="product">
+        SELECT * FROM easybuy_product where id=#{id};
+    </select>
+
+
+    <update id="updateProduct">
+        UPDATE easybuy_product
+
+        <set>
+            <if test="name!=null and name!=''">
+                name=#{name},
+            </if>
+
+            <if test="description!=null and description!=''">
+                description=#{description},
+            </if>
+
+            <if test="price!=null and price!=''">
+                price=#{price},
+            </if>
+
+            <if test="stock!=null and stock!=''">
+                stock=#{stock},
+            </if>
+
+
+            <if test="categoryLevel1Id!=null and categoryLevel1Id!=''">
+                categoryLevel1Id=#{categoryLevel1Id},
+            </if>
+
+            <if test="categoryLevel2Id!=null and categoryLevel2Id!=''">
+                categoryLevel2Id=#{categoryLevel2Id},
+            </if>
+
+            <if test="categoryLevel3Id!=null and categoryLevel3Id!=''">
+                categoryLevel3Id=#{categoryLevel3Id},
+            </if>
+
+
+            <if test="fileName!=null and fileName!=''">
+                fileName=#{fileName},
+            </if>
+
+            <if test="preStock!=null">
+                preStock=#{preStock},
+            </if>
+
+        </set>
+
+        WHERE id=#{id}
+    </update>
+
+
+    <insert id="addProduct" keyProperty="id" keyColumn="id" useGeneratedKeys="true">
+        INSERT INTO
+        easybuy_product(name,description,price,stock,fileName,categoryLevel1Id,categoryLevel2Id,categoryLevel3Id,isDelete,createTime)
+
+        VALUE
+        (#{name},#{description},#{price},#{stock},#{fileName},#{categoryLevel1Id},#{categoryLevel2Id},#{categoryLevel3Id},0,NOW());
+    </insert>
+
+
+    <select id="checkProductName" resultType="product">
+        SELECT * FROM easybuy_product WHERE name =#{name}
+    </select>
+
+</mapper>

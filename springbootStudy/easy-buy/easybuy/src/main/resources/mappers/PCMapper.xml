@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.doghome.easybuy.mapper.PCMapper">
+
+    <select id="showPCList" resultType="ProductCategory">
+        select * from easybuy_product_category
+        <where>
+            isDelete=0
+            <if test="type!=null">and type=#{type}</if>
+            <if test="parentId!=null">parentId=#{parentId}</if>
+        </where>
+    </select>
+
+
+
+    <select id="pcByPage" resultType="ProductCategory">
+        SELECT c.*,p.`name` as parentName
+        FROM easybuy_product_category c
+        LEFT JOIN easybuy_product_category p
+        on c.parentId=p.id
+        WHERE c.isDelete=0;
+    </select>
+
+    <!--    查询所有的父级目录-->
+    <select id="selectParentProductCategory" resultType="ProductCategory">
+        select a.* ,b.id as parentId,b.name as parentName,c.id as oldParentId,c.name as oldParentName
+        from easybuy_product_category as a
+        left join easybuy_product_category as b
+        on a.parentId=b.id
+        left join easybuy_product_category as c
+        on b.parentId=c.id
+        where a.id=#{id}
+    </select>
+
+    <select id="selectCategoryByType" resultType="ProductCategory">
+        SELECT * FROM easybuy_product_category WHERE type=#{type};
+    </select>
+
+    <update id="updateCategory">
+        UPDATE easybuy_product_category
+        <set>
+            <if test="name!=null and name !=''">
+                name=#{name},
+            </if>
+
+            <if test="parentId!=null and parentId!=''">
+                parentId=#{parentId},
+            </if>
+        </set>
+
+        where id=#{id};
+
+    </update>
+
+
+    <select id="selectProductCategoryByName" resultType="ProductCategory">
+        SELECT * FROM easybuy_product_category WHERE name =#{name};
+    </select>
+
+
+    <select id="findCategory" resultType="ProductCategory">
+        SELECT * FROM easybuy_product_category
+        <where>
+            <if test="parentId!=null and parentId !=''">
+                parentId=#{id}
+            </if>
+        </where>
+    </select>
+
+
+    <update id="deleteCategory">
+        UPDATE easybuy_product_category SET isDelete=1 WHERE id=#{id}
+    </update>
+
+
+    <!--根据上级分类查询下级分类-->
+    <select id="selectParent" resultType="ProductCategory">
+        select a.* ,b.id as parentId,b.name as parentName,c.id as oldParentId,c.name as oldParentName
+        from easybuy_product_category as a
+        left join easybuy_product_category as b
+        on a.parentId=b.id
+        left join easybuy_product_category as c
+        on b.parentId=c.id
+        where a.parentId=#{parentId}
+    </select>
+
+
+    <insert id="addCategory">
+        INSERT INTO easybuy_product_category(name,parentId,type,isDelete)
+        VALUES(#{name},#{parentId},#{type},0)
+    </insert>
+
+    <select id="selectProduct" resultType="int">
+        SELECT COUNT(1) FROM easybuy_product_category as b, easybuy_product as c where
+        (b.id=c.categoryLevel1Id or b.id=c.categoryLevel2Id or b.id=c.categoryLevel3Id)
+        and b.id=#{id}
+    </select>
+
+
+</mapper>

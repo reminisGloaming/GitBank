@@ -1,0 +1,79 @@
+spring:
+  application:
+    name: easybuy
+
+  #
+  #  profiles:
+  #    active: dev
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/shoppingwebsitedata?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: huxinyuana1023
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+
+  redis:
+    database: 0
+    host: 192.168.137.129
+    port: 6379
+    password: huxinyuana1023
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        max-idle: 8
+        min-idle: 0
+
+
+  elasticsearch:
+    rest:
+      uris: http://192.168.137.129:9200
+
+  mail:
+    host: smtp.qq.com
+    port: 587
+    username: 296136161@qq.com
+    password: cqhkrircphnubicf
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+
+
+mybatis:
+  mapper-locations: mappers/*.xml
+  type-aliases-package: com.doghome.easybuy.entity
+
+
+server:
+  servlet:
+    context-path: /api
+  port: 8080
+
+
+# 设置输出的日志级别是debug
+logging:
+  level:
+    root: info
+
+
+pay:
+  aliypay:
+    app_id: 9021000141650568
+
+
+#sftp的四个参数
+
+username: penger
+password: huxinyuana1023
+host: 192.168.137.129
+port: 22
+

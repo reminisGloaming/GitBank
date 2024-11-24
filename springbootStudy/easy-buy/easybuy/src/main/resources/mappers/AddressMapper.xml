@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.doghome.easybuy.mapper.AddressMapper">
+
+    <insert id="addAddress">
+        INSERT INTO
+        easybuy_user_address(userId,name,province,city,area,address,phone,email,remark,isDefault,createTime,delFlag)
+
+        VALUE(#{userId},#{name},#{province},#{city},#{area},#{address},#{phone},#{email},#{remark},#{isDefault},NOW(),0);
+
+    </insert>
+
+    <select id="selectAddressList" resultType="UserAddress">
+        SELECT * FROM easybuy_user_address
+        <where>
+            <if test="userId!=null">
+                userId=#{userId}
+            </if>
+            and delFlag=0
+        </where>
+    </select>
+
+    <select id="findAddress" resultType="UserAddress">
+        SELECT * FROM easybuy_user_address WHERE id=#{id};
+    </select>
+
+    <update id="updateAddress">
+        UPDATE easybuy_user_address
+        SET userId=#{userId},name=#{name},province=#{province},city=#{city},area=#{area},address=#{address},phone=#{phone},email=#{email},remark=#{remark},isDefault=#{isDefault}
+        where id=#{id};
+    </update>
+
+
+    <update id="deleteAddress">
+        UPDATE easybuy_user_address
+        SET delFlag =1
+        where id=#{id};
+    </update>
+
+    <update id="setIsDefault">
+        UPDATE easybuy_user_address SET isDefault=1 where id=#{id};
+    </update>
+
+    <update id="updateAddressNotDefault">
+        UPDATE easybuy_user_address SET isDefault =0 where userId = #{userId};
+    </update>
+</mapper>
